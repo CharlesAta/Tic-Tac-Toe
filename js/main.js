@@ -29,6 +29,9 @@ playerChoice: ‘X’
 	{
 	playerTurn: false,
 	playerChoice: ‘O’
+},
+{
+Winner: false
 }
 ]
 
@@ -41,19 +44,24 @@ let gameStatus = null;
 
 
 // active class for when the cell has been filled/used
-// store whether the box has an X or O (eg. three in a row?)
-// variable for the winner
-// checkWinner function -> to check if 3 values match/correspond to a winner
-
 
 Let messageDiv = document.querySelector(“.message”);
 
 Function initialize() {
 	gridCells.forEach((cell) => {
+		cell.classList.remove(“active”);
 cell.textContent = “”;
 cell.addEventListener(“click”, playerMove)
 });
+playerX.playerTurn = true;
 gameStatus = “Playing”;
+render();
+}
+
+Function gameOver() {
+gridCells.forEach((cell) => {
+	cell.classList.add(“active”);
+}
 }
 
 Function checkWinner() {
@@ -62,12 +70,16 @@ Function checkWinner() {
 winningCombos[i][0].textContent === playerX.playerChoice
 && winningCombos[i][1].textContent === playerX.playerChoice
 && winningCombos[i][2].textContent === playerX.playerChoice
-) { gameStatus = “Win X”}
+) { gameStatus = “Win X”
+    gameOver();	
+}
 Else if (
 	winningCombos[i][0].textContent === playerO.playerChoice
 && winningCombos[i][1].textContent === playerO.playerChoice
 && winningCombos[i][2].textContent === playerO.playerChoice
-) { gameStatus = “Win O”}
+) { gameStatus = “Win O”
+    gameOver();	
+}
 ) 
 }
 Let count = 0;
@@ -85,13 +97,17 @@ If (count === 9) {
 
 Function playerMove() {
 	If (playerX.playerTurn) {
+		while (!target.classList.contains(“active”)) {
 		target.classList.add(“active”);
 	target.innerText = playerX.playerChoice
+}
 	playerX.playerTurn = false;
 	playerO.playerTurn = true;
 } Else {
-	target.classList.add(“active”);
+	while (!target.classList.contains(“active”)) {
+target.classList.add(“active”);
 	target.innerText = playerO.playerChoice;
+}
 playerX.playerTurn = true;
 	playerO.playerTurn = false;
 }
@@ -110,4 +126,15 @@ Function message() {
 } Else {
 	messageDiv.textContent =`It’s Player O’s Turn!`;
 }
+}
+
+
+window.addEventListener(“click”, render);
+setTimeout(render, 500);
+
+Function render(){
+	message();
+	playerMove();
+	checkWinner();
+message();
 }
