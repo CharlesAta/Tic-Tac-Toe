@@ -75,6 +75,8 @@ function gameOver() {
 	});
 }
 
+// its a winner!
+
 function checkWinner() {
 	let count = 0;
 	for (let cell of gridCells) {
