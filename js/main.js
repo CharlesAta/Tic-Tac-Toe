@@ -75,6 +75,8 @@ function gameOver() {
 	});
 }
 
+// its a winner!
+
 function checkWinner() {
 	for (let i = 0; i < winningCombos.length; i++) {
 		if (
