@@ -1,3 +1,5 @@
+// 1) Define required constants
+
 const box1 = document.getElementById("box1");
 const box2 = document.getElementById("box2");
 const box3 = document.getElementById("box3");
@@ -9,8 +11,6 @@ const box8 = document.getElementById("box8");
 const box9 = document.getElementById("box9");
 
 const reset = document.getElementById("reset");
-
-reset.addEventListener("click", initialize);
 
 const winningCombos = [
 	[box1, box2, box3],
@@ -42,9 +42,20 @@ const players = [
 const playerX = players[0];
 const playerO = players[1];
 
+// 2) Define required variables used to track the state of the game
+
 let gameStatus = null;
 
 let messageDiv = document.querySelector(".message");
+
+// Add Event Listeners
+
+reset.addEventListener("click", initialize);
+
+window.addEventListener("click", render);
+setTimeout(render, 500);
+
+// Define Required Functions
 
 function initialize() {
 	gridCells.forEach((cell) => {
@@ -99,18 +110,18 @@ function checkWinner() {
   }
 }
 
-function playerMove() {
+function playerMove(evt) {
 	if (playerX.playerTurn) {
-		while (!target.classList.contains("active")) {
-			target.classList.add("active");
-	    	target.innerText = playerX.playerChoice
+		while (!evt.target.classList.contains("active")) {
+			evt.target.classList.add("active");
+	    	evt.target.innerText = playerX.playerChoice
     	}
 		playerX.playerTurn = false;
 		playerO.playerTurn = true;
   	} else {
-		while (!target.classList.contains("active")) {
-			target.classList.add("active");
-	    	target.innerText = playerO.playerChoice;
+		while (!evt.target.classList.contains("active")) {
+			evt.target.classList.add("active");
+	    	evt.target.innerText = playerO.playerChoice;
     	}
     	playerX.playerTurn = true;
 	  	playerO.playerTurn = false;
@@ -132,10 +143,6 @@ function message() {
     	}
   	}
 }
-
-
-window.addEventListener("click", render);
-setTimeout(render, 500);
 
 function render(){
 	message();
