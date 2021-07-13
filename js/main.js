@@ -65,6 +65,7 @@ function initialize() {
 	});
 	playerX.playerTurn = true;
 	gameStatus = "Playing";
+	debugger;
 	render();
 }
 
@@ -126,6 +127,7 @@ function playerMove(evt) {
     	playerX.playerTurn = true;
 	  	playerO.playerTurn = false;
   	}
+	checkWinner();
 }
 
 function message() {
@@ -147,6 +149,5 @@ function message() {
 function render(){
 	message();
 	playerMove();
-	checkWinner();
 }
 
