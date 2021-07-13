@@ -25,6 +25,7 @@ const winningCombos = [
 
 const gridCells = document.querySelectorAll(".grid-item");
 
+
 const players = [
   {
     playerTurn: false,
@@ -65,7 +66,6 @@ function initialize() {
 	});
 	playerX.playerTurn = true;
 	gameStatus = "Playing";
-	debugger;
 	render();
 }
 
@@ -76,6 +76,19 @@ function gameOver() {
 }
 
 function checkWinner() {
+	let count = 0;
+	for (let cell of gridCells) {
+		if (cell.classList.contains("active")) {
+			count++;
+		  }
+		}
+	  
+	if (count === 9) {
+	  gameStatus = "Tie";
+	} else {
+	  gameStatus = "Playing";
+	}
+	
 	for (let i = 0; i < winningCombos.length; i++) {
 		if (
 			winningCombos[i][0].textContent === playerX.playerChoice
@@ -96,34 +109,25 @@ function checkWinner() {
 			gameOver();	
 		}
   	}
-  
-  let count = 0;
-  for (let cell of gridCells) {
-	  if (cell.classList.contains("active")) {
-		  count++;
-    	}
-  	}
-    
-  if (count === 9) {
-    gameStatus = "Tie";
-  } else {
-	gameStatus = "Playing";
-  }
 }
 
 function playerMove(evt) {
 	if (playerX.playerTurn) {
-		while (!evt.target.classList.contains("active")) {
-			evt.target.classList.add("active");
-	    	evt.target.innerText = playerX.playerChoice
-    	}
+		if (evt !== undefined) {
+			while (!evt.target.classList.contains("active")) {
+				evt.target.classList.add("active");
+				evt.target.innerText = playerX.playerChoice
+			}
+		}
 		playerX.playerTurn = false;
 		playerO.playerTurn = true;
   	} else {
-		while (!evt.target.classList.contains("active")) {
-			evt.target.classList.add("active");
-	    	evt.target.innerText = playerO.playerChoice;
-    	}
+		if (evt !== undefined) {
+			while (!evt.target.classList.contains("active")) {
+				evt.target.classList.add("active");
+				evt.target.innerText = playerO.playerChoice;
+			}
+		}
     	playerX.playerTurn = true;
 	  	playerO.playerTurn = false;
   	}
