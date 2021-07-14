@@ -1,34 +1,76 @@
-.grid-container {
-    display: grid;
-    border: 4px solid blue;
-    grid-template-columns: auto auto auto;
-    grid-gap: 20px;
-    background-color: brown;
+
+* {
+  /* height & width now includes border & padding */
+  box-sizing: border-box;
+}
+
+.game-title {
+ font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+ text-align: center;
+ font-size: 50px;
+ color: #34495E;
 }
 
 .grid-item {
-    border: 1px solid black;
-    padding: 50px;
-    background-color: cornsilk;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 40px;
+  color: white;
+}
+
+.message {
+  
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 30px;
+  text-align: center;
+  color: #34495E;
+}
+
+.grid-container {
+    display: grid;
+    align-items: stretch;
+    grid-template-columns: auto auto auto;
+    grid-gap: 20px;
+    background-color: #F1C40F;
+    width: 50vmax;
+    margin: auto;
+}
+
+
+.grid-item {
+    display: flex;
+    align-items: center;
+    border: 1px solid #EAEDED;
+    padding: 50px 1.3rem;
+    justify-content: center;
+    background-color:#82E0AA;
     text-align: center;
 }
 
 
+.center-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+
+#reset {
+
+    background-color: #4CAF50;
+    border: none;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: white;
+    padding: 30px 70px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    cursor: pointer;
+  
+  }
+}
+
 .options-container {
     height: 200px;
-  position: relative;
-  border: 3px solid green;
+    position: relative;
 }
 
-.center-button {
-    margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-}
-
-.active {
-    
-}
