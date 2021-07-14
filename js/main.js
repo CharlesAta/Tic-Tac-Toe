@@ -16,6 +16,7 @@ const reset = document.getElementById("reset");
 
 // Initialize the grid container reference
 const gridCells = document.querySelectorAll(".grid-item");
+const grid = document.querySelector(".grid-container");
 
 /*----- constants -----*/
 
@@ -35,7 +36,7 @@ const winningCombos = [
 const players = [
 	{
 	  playerTurn: false,
-	  playerChoice: "X" 
+	  playerChoice: "X"
 	},
 	  {
 		playerTurn: false,
@@ -65,9 +66,6 @@ window.addEventListener("click", render);
 
 /*----- functions -----*/
 
-// Call the render function every 0.5 seconds
-setTimeout(render, 500);
-
 // Function to initialize the start of a game
 function initialize() {
 	// For each cell in the grid
@@ -76,9 +74,9 @@ function initialize() {
 		cell.classList.remove("active");
 		// Set the content to empty
 		cell.textContent = "";
-		// Add an event listener to notify when a player has made a move
-		cell.addEventListener("click", playerMove);
 	});
+	// Add an event listener to notify when a player has made a move
+	grid.addEventListener("click", playerMove);
 	// Initialize the first player to be X
 	playerX.playerTurn = true;
 	// Set the game status to playing
@@ -142,8 +140,10 @@ function playerMove(evt) {
 	if (playerX.playerTurn) {
 		// If event has occured
 		if (evt !== undefined) {
+			console.log(evt);
+			console.dir(evt);
 			// If the cell is not already active
-			if (!evt.target.classList.contains("active")) {
+			if (!evt.target.classList.contains("active") && !evt.target.classList.contains("grid-container")) {
 				// Add the active class to the cell
 				evt.target.classList.add("active");
 				// Insert the player's move
@@ -159,7 +159,7 @@ function playerMove(evt) {
 		// If event has occured
 		if (evt !== undefined) {
 			// If the cell is not already active
-			if (!evt.target.classList.contains("active")) {
+			if (!evt.target.classList.contains("active") && !evt.target.classList.contains("grid-container")) {
 				// Add the active class to the cell
 				evt.target.classList.add("active");
 				// Insert the player's move
@@ -198,7 +198,9 @@ function message() {
 
 // Function to render the current state
 function render(){
-	message();
-	playerMove();
+	if (gameStatus) {
+		message();
+		playerMove();
+	}
 }
 
