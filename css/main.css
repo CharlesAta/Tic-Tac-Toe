@@ -1,8 +1,5 @@
 
-* {
-  /* height & width now includes border & padding */
-  box-sizing: border-box;
-}
+
 
 .game-title {
  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
